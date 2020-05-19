@@ -32,11 +32,8 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    #print("Server received request for 'Home' page...")
-
-    """List all available api routes."""
-    return (
-         f"Available Routes:<br/>"
+    return(
+        f"Available Routes:<br/>"
         f"/api/v1.0/names<br/>"
         f"/api/v1.0/station"
     )
