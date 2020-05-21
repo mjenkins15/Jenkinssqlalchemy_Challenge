@@ -122,12 +122,12 @@ def start(start_date):
     return jsonify(temp_ranges) 
 
 @app.route("/api/v1.0/<start>/<end>")
-def start_end(start_end):
+def start_end(start,end):
     session = Session(engine)
 # Find the minimum temp, average temp, and maximum temp for all tobs 
     sel = [func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)]
 
-    temp_range = session.query(*sel).filter(Measurement.date >= start_end).filter(Measurement.date <= start_end).all()
+    temp_range = session.query(*sel).filter(Measurement.date >= start).filter(Measurement.date <= end).all()
 
     #Use numpy ravel function to extract all individual temp observations from top_station-Obs variable and allow us to store them somewhere else so that we can use them in a list.
     temp_ranges = list(np.ravel(temp_range))
